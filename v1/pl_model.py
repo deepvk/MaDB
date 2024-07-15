@@ -23,7 +23,6 @@ class SpectralLoss(nn.Module):
 class PL_model(pl.LightningModule):
     def __init__(self, mic=1):
         super().__init__()
-        self.mvdr = MVDR(0)
         self.model_mask = mask_estimator(1)
         fs = 16000  # Sampling frequency
         window_length = int(0.025 * fs)  # 25 ms window length
@@ -33,9 +32,10 @@ class PL_model(pl.LightningModule):
         self.criterion = SpectralLoss()
         self.metric = ScaleInvariantSignalNoiseRatio()
     def forward(self, x):
+        mvdr = MVDR(0)
         spec = self.stft.stft(x)
         mask = self.model_mask(spec)
-        predict_spec = self.mvdr(spec, mask)
+        predict_spec = mvdr(spec, mask)
         return predict_spec, self.stft.istft(predict_spec, x.shape[-1]) 
     
     def training_step(self, batch, batch_idx):
@@ -77,7 +77,7 @@ class PL_model(pl.LightningModule):
         
         
     def configure_optimizers(self):
-        optimizer = torch.optim.RMSprop(self.parameters(), lr=1e-6)
+        optimizer = torch.optim.AdamW(self.parameters(), lr=3e-4)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
             optimizer, T_0=40
         )
