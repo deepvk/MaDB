@@ -86,8 +86,7 @@ class UpSample(nn.Module):
     
     
 class Unet_model(nn.Module):
-    def __init__(
-        self):
+    def __init__(self, botlleneck=2):
         super().__init__()
         # enocder
         self.down_1 = DownSample(
@@ -140,8 +139,8 @@ class Unet_model(nn.Module):
             normalization=nn.BatchNorm2d(128)
         )
         # bottleneck
-        self.lstm = nn.LSTM(input_size=128*2, 
-                            hidden_size=128*2, 
+        self.lstm = nn.LSTM(input_size=128*botlleneck, 
+                            hidden_size=128*botlleneck, 
                             num_layers=1, 
                             batch_first=True)
         # decoder

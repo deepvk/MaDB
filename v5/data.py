@@ -36,12 +36,15 @@ def collate_fn(batch): # list -> [[target, mic, nosie],[...],[...]]
     return target_batch, mic_batch, noise_batch
 
 class my_dataset(Dataset):
-    def __init__(self, path):
+    def __init__(self, path, sec=None):
         self.path_signal = os.listdir(f'{path}/mic')
         self.path_target = f'{path}/target'
         self.path_mic = f'{path}/mic'
-        #self.noise = torch.rand(1,53768)
         
+        if sec:
+            self.sec = sec*16000
+        else:
+             self.sec = sec
     def __len__(self):
         return len(self.path_signal)
     
@@ -52,4 +55,8 @@ class my_dataset(Dataset):
         mic_array, sample_rate = ta.load(f'{self.path_mic}/{path}')
         
         target = F.pad(target, (0, mic_array.shape[-1] - target.shape[-1]))
-        return  target, mic_array, generate_mixture(target,  torch.rand(1,target.shape[-1]), 10)
+        
+        if self.sec:
+            return target[:,:self.sec], mic_array[:,:self.sec], generate_mixture(target,  torch.rand(1,target.shape[-1]), 10)[:,:self.sec]
+        else:
+            return  target, mic_array, generate_mixture(target,  torch.rand(1,target.shape[-1]), 10)
