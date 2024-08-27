@@ -1,7 +1,9 @@
  [![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://maks00170.github.io/beam_github_page/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# Beamformer MVDR (Minimum Variance Distortionless Response) 🗣  🎙️🎙️🎙️🎙️
+# Beamformer 🗣  🎙️🎙️🎙️🎙️
+
+Beamformer MVDR (Minimum Variance Distortionless Response)
 
 ## Structure
 - [`src`](./src) ‒ main source code
@@ -54,12 +56,12 @@ The service implements the calculation of the NISQA-s metric
 1. Clone reposit
         git clone https://github.com/deepvk/NISQA-s.git ./web-streamlit/NISQAs
 
-2. Change web_streamlit/NISQAs/config/nisqa_s.yaml:  
+2. Change [web_streamlit/NISQAs/config/nisqa_s.yaml](/web_streamlit/NISQAs/config/nisqa_s.yaml#L72):  
 
 ``` yaml
 ckp: src/weights/nisqa_s.tar --> web_streamlit/NISQAs/src/weights/nisqa_s.tar
 ```
 
-2. Run: 
+3. Run: 
 
         python -m streamlit run web_streamlit/app.py
