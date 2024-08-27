@@ -51,6 +51,15 @@ We used the following datasets:
       
 ## Web Inference
 The service implements the calculation of the NISQA-s metric
-1. Run: 
+1. Clone reposit
+        git clone https://github.com/deepvk/NISQA-s.git ./web-streamlit/NISQAs
+
+2. Change web_streamlit/NISQAs/config/nisqa_s.yaml:  
+
+``` yaml
+ckp: src/weights/nisqa_s.tar --> web_streamlit/NISQAs/src/weights/nisqa_s.tar
+```
+
+2. Run: 
 
         python -m streamlit run web_streamlit/app.py
