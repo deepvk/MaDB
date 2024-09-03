@@ -53,7 +53,7 @@ We used the following datasets:
       
 ## Web Inference
 The service implements the calculation of the NISQA-s metric
-1. Clone reposit
+1. Clone repository
         git clone https://github.com/deepvk/NISQA-s.git ./web-streamlit/NISQAs
 
 2. Change [web_streamlit/NISQAs/config/nisqa_s.yaml](/web_streamlit/NISQAs/config/nisqa_s.yaml#L72):  
@@ -65,3 +65,27 @@ ckp: src/weights/nisqa_s.tar --> web_streamlit/NISQAs/src/weights/nisqa_s.tar
 3. Run: 
 
         python -m streamlit run web_streamlit/app.py
+
+## Metrics
+Used https://github.com/deepvk/NISQA-s
+
+NOI - noisiness
+
+COL - coloration
+
+DISC - discontinuty
+
+LOUD - loudness
+
+MOS - mean opinion score
+
+
+We have generated a dataset (100 tracks) using pyroomacustics with various configurations. 
+For the noise source, we used noise from the demand data
+
+| Method | NOI | COL | DISC | LOUD | MOS |
+|-------------|-----|-----|-----|-----|-----|
+| Original    | 1.7  | 2.27 | 2.8  | 2.46 | 2.76 |
+| MVDR        | 1.87 | 2.68 | 2.9  | 2.64 | 2.48 |
+| MVDR stream | 1.66 | 2.5  | 2.78 | 2.56 | 2.24 |
+| SDWMW       | 1.77 | 2.39 | 2.75 | 2.51 | 2.82 |
