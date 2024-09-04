@@ -49,7 +49,9 @@ def file_infer(pipline, model):
         with col2:
             show_nisqas_metrics(nisqa_get_metrics(ref_waveform[0], sample_rate))
 
-        st.write(f"Noise reduction output for the reference channel: {ref_channel.item()}")
+        st.write(
+            f"Noise reduction output for the reference channel: {ref_channel.item()}"
+        )
         col3, col4 = st.columns([10, 2])
         with col3:
             wave_predict, mask, h_t = pipline.pipline_model(model, ref_waveform)
