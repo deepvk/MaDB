@@ -15,13 +15,13 @@ warnings.filterwarnings("ignore")
 
 def file_infer(pipline, model):
     st.header("File")
-    uploaded_file = st.file_uploader("Загрузите аудиофайл", type=["wav"])
+    uploaded_file = st.file_uploader("Download the audio file", type=["wav"])
     st.write(
         """
-            NOI - noisiness (Зашумленность)\n
-            COL - coloration (Окраска)\n
-            DISC - discontinuty (Прерывемость)\n
-            LOUD - loudness (Громкость)\n
+            NOI - noisiness\n
+            COL - coloration\n
+            DISC - discontinuty\n
+            LOUD - loudness\n
             MOS - mean opinion score
             """
     )
@@ -30,9 +30,9 @@ def file_infer(pipline, model):
 
         st.write(
             f""" 
-                 Оригинал
+                 Original
 
-                 Количество каналов: {waveform.shape[0]}
+                 Count channel: {waveform.shape[0]}
                  """
         )
 
@@ -49,7 +49,7 @@ def file_infer(pipline, model):
         with col2:
             show_nisqas_metrics(nisqa_get_metrics(ref_waveform[0], sample_rate))
 
-        st.write(f"Предикт шумодава для канала: {ref_channel.item()}")
+        st.write(f"Noise reduction output for the reference channel: {ref_channel.item()}")
         col3, col4 = st.columns([10, 2])
         with col3:
             wave_predict, mask, h_t = pipline.pipline_model(model, ref_waveform)
