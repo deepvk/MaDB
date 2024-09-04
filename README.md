@@ -54,6 +54,7 @@ We used the following datasets:
 ## Web Inference
 The service implements the calculation of the NISQA-s metric
 1. Clone repository
+
         git clone https://github.com/deepvk/NISQA-s.git ./web-streamlit/NISQAs
 
 2. Change [web_streamlit/NISQAs/config/nisqa_s.yaml](/web_streamlit/NISQAs/config/nisqa_s.yaml#L72):  

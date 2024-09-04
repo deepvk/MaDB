@@ -48,23 +48,31 @@ class Inference:
         first_none = True
         h_t = None
         pred = []
-        
+
         audio, sr = sf.read(input_file)
         audio = torch.as_tensor(audio.T)
 
         framesize = self.block_size
         if audio.shape[0] % framesize != 0:
-            audio = torch.cat((audio, torch.zeros(audio.shape[0], framesize - audio.shape[0] % framesize)),dim=-1)
+            audio = torch.cat(
+                (
+                    audio,
+                    torch.zeros(audio.shape[0], framesize - audio.shape[0] % framesize),
+                ),
+                dim=-1,
+            )
 
         audio_spl = torch.split(audio, framesize, dim=-1)
         for au in audio_spl:
-            ref, last_power, ref_idx = self.find_ref_chennel(au[None].to(torch.float32), last_power)
+            ref, last_power, ref_idx = self.find_ref_chennel(
+                au[None].to(torch.float32), last_power
+            )
             if first_none and last_power.sum() != 0:
                 self.mvdr = MVDR(ref_idx.item())
                 first_none = False
 
             if self.mvdr is not None:
-                #self.mvdr.ref_channel = ref_idx.item()
+                # self.mvdr.ref_channel = ref_idx.item()
                 pred_denoise, mask, h_t = self.pipline.pipline_model(
                     self.model, ref, h_t
                 )
@@ -75,7 +83,7 @@ class Inference:
 
             else:
                 pred.append(data[0][0])
-                
+
         sf.write(output_file, torch.concat(pred, dim=-1), sr)
 
 
