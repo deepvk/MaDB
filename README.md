@@ -6,6 +6,8 @@
 Beamformer MVDR (Minimum Variance Distortionless Response)
 
 ## Structure
+- [`config`](./config) ‒ configuration file
+- [`scripts`](./scripts) ‒ different useful scripts, e.g. inference and training
 - [`src`](./src) ‒ main source code
 - [`web_streamlit`](./web_streamlit) ‒ source code for the inference in web service
 
