@@ -1,9 +1,10 @@
  [![githubio](https://img.shields.io/badge/GitHub.io-Audio_Samples-blue?logo=Github&style=flat-square)](https://maks00170.github.io/beam_github_page/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# Beamformer 🗣  🎙️🎙️🎙️🎙️
+# MaDB 🗣  🎙️🎙️🎙️🎙️
+MaDB - Masked Denoising Beamforming
 
-Beamformer MVDR (Minimum Variance Distortionless Response)
+Beamformer: MVDR (Minimum Variance Distortionless Response)
 
 ## Structure
 - [`config`](./config) ‒ configuration file
